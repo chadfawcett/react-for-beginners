@@ -5,8 +5,6 @@ var CSSTransitionGroup = require('react-addons-css-transition-group');
 var ReactRouter = require('react-router');
 var Router = ReactRouter.Router;
 var Route = ReactRouter.Route;
-var Navigation = ReactRouter.Navigation;
-var History = ReactRouter.History;
 var createBrowserHistory = require('history/lib/createBrowserHistory');
 
 var h = require('./helpers');
@@ -16,6 +14,13 @@ var Rebase = require('re-base');
 var base = Rebase.createClass('https://catch-of-the-day-chad.firebaseio.com');
 
 var Catalyst = require('react-catalyst');
+
+
+/*
+ * Import Components
+ */
+import NotFound from './components/NotFound';
+import StorePicker from './components/StorePicker';
 
 /*
  * App
@@ -283,44 +288,6 @@ var Inventory = React.createClass({
     removeFish: React.PropTypes.func.isRequired
   }
 });
-
-/*
- * StorePicker
- * This will let us make <StorePicker/>
- */
-var StorePicker = React.createClass({
-  mixins: [History],
-  goToStore: function (event) {
-    event.preventDefault();
-
-    /* Get data from input */
-    var storeId = this.refs.storeId.value;
-
-    /* Transition from store picker to <App /> */
-    this.history.pushState(null, '/store/' + storeId);
-  },
-  render: function () {
-    return (
-      <form className="store-selector" onSubmit={this.goToStore}>
-        <h2>Please enter a store</h2>
-        <input type="text" ref="storeId" defaultValue={h.getFunName()} required />
-        <input type="Submit" />
-      </form>
-    )
-  }
-});
-
-/*
- * Not Found
- */
-var NotFound = React.createClass({
-  render: function () {
-    return (
-      <h1>Not Found!</h1>
-    )
-  }
-});
-
 
 /*
  * Routes
