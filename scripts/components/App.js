@@ -94,7 +94,7 @@ class App extends React.Component {
           removeFish={this.removeFish}
           loadSamples={this.loadSamples}
           fishes={this.state.fishes}
-          linkState={this.linkState.bind(this)} />
+          linkState={this.linkState.bind(this)} {...this.props} />
       </div>
     )
   }
